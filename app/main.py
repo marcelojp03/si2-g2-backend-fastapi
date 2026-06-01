@@ -2,7 +2,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from app.config import settings
-from app.routers import voz, reporte_ia, riesgo
+from app.routers import voz, reporte_ia, riesgo, consulta_natural
 
 app = FastAPI(
     title="SI2 G2 — Backend IA",
@@ -31,6 +31,7 @@ app.add_middleware(
 app.include_router(voz.router)
 app.include_router(reporte_ia.router)
 app.include_router(riesgo.router)
+app.include_router(consulta_natural.router)
 
 
 @app.get("/health")

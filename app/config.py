@@ -4,6 +4,7 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 class Settings(BaseSettings):
     database_url: str = ""
     openai_api_key: str = ""
+    openai_model: str = "gpt-4o-mini"
     jwt_secret: str = ""
     backend_spring_url: str = "http://localhost:2026"
     environment: str = "development"
