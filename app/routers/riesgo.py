@@ -4,6 +4,8 @@ Sprint 4 — scoring heurístico determinista sobre métricas académicas.
 Estrategia de IA: APIs externas (LLM), sin modelos de ML locales. Cualquier
 enriquecimiento futuro (explicaciones / recomendaciones) se delega a la API externa.
 """
+import logging
+
 from fastapi import APIRouter, Depends
 
 from app.schemas.ia_schemas import (
@@ -13,6 +15,8 @@ from app.schemas.ia_schemas import (
     RiesgoInstitucionResponse,
 )
 from app.dependencies import verify_jwt
+
+logger = logging.getLogger(__name__)
 
 router = APIRouter(prefix="/api/ia", tags=["Riesgo Académico"])
 
@@ -76,7 +80,14 @@ async def predecir_riesgo(
     Predice el nivel de riesgo académico para una lista de estudiantes.
     Devuelve nivel (BAJO/MEDIO/ALTO/CRITICO), probabilidad y factores principales.
     """
+    logger.info("predecir_riesgo: %d estudiantes recibidos", len(estudiantes))
     resultados = [_predecir_individual(e) for e in estudiantes]
+
+    niveles = {}
+    for r in resultados:
+        niveles[r.nivel_riesgo] = niveles.get(r.nivel_riesgo, 0) + 1
+    logger.info("predecir_riesgo: resultados=%d distribucion=%s", len(resultados), niveles)
+
     return ApiResponse.ok(
         f"Predicción completada para {len(resultados)} estudiantes",
         [r.model_dump() for r in resultados],

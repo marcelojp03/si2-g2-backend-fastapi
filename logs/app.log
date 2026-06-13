@@ -1,0 +1,59 @@
+2026-06-08 23:19:38 | INFO     | app.main | FastAPI started — environment=development port=8001 model=gpt-5.4-mini
+2026-06-08 23:19:51 | INFO     | app.dependencies | verify_jwt: OK user_id=robertocervantes@gmail.com id_institucion=df679c57-39ec-44ba-8af5-4c72874bd298 roles=['ADMIN_INSTITUCION']
+2026-06-08 23:19:51 | INFO     | app.routers.reporte_ia | nl_a_reporte: consulta=Muéstrame los 10 alumnos con mejor promedio en matemáticas del segundo trimestre
+2026-06-08 23:19:53 | INFO     | app.routers.reporte_ia | nl_a_reporte: calling OpenAI model=gpt-5.4-mini
+2026-06-08 23:19:54 | INFO     | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 400 Bad Request"
+2026-06-08 23:19:54 | ERROR    | app.routers.reporte_ia | nl_a_reporte: OpenAI error — Error code: 400 - {'error': {'message': "Unsupported parameter: 'max_tokens' is not supported with this model. Use 'max_completion_tokens' instead.", 'type': 'invalid_request_error', 'param': 'max_tokens', 'code': 'unsupported_parameter'}}
+Traceback (most recent call last):
+  File "C:\UAGRM\Sistemas de informacion 2\semestre-1-2026\proyecto grupal\si2-g2-backend-fastapi\app\routers\reporte_ia.py", line 192, in nl_a_reporte
+    respuesta = client.chat.completions.create(
+        model=settings.openai_model,
+    ...<5 lines>...
+        max_tokens=512,
+    )
+  File "C:\UAGRM\Sistemas de informacion 2\semestre-1-2026\proyecto grupal\si2-g2-backend-fastapi\.venv\Lib\site-packages\openai\_utils\_utils.py", line 279, in wrapper
+    return func(*args, **kwargs)
+  File "C:\UAGRM\Sistemas de informacion 2\semestre-1-2026\proyecto grupal\si2-g2-backend-fastapi\.venv\Lib\site-packages\openai\resources\chat\completions.py", line 859, in create
+    return self._post(
+           ~~~~~~~~~~^
+        "/chat/completions",
+        ^^^^^^^^^^^^^^^^^^^^
+    ...<40 lines>...
+        stream_cls=Stream[ChatCompletionChunk],
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\UAGRM\Sistemas de informacion 2\semestre-1-2026\proyecto grupal\si2-g2-backend-fastapi\.venv\Lib\site-packages\openai\_base_client.py", line 1283, in post
+    return cast(ResponseT, self.request(cast_to, opts, stream=stream, stream_cls=stream_cls))
+                           ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\UAGRM\Sistemas de informacion 2\semestre-1-2026\proyecto grupal\si2-g2-backend-fastapi\.venv\Lib\site-packages\openai\_base_client.py", line 960, in request
+    return self._request(
+           ~~~~~~~~~~~~~^
+        cast_to=cast_to,
+        ^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+        retries_taken=retries_taken,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\UAGRM\Sistemas de informacion 2\semestre-1-2026\proyecto grupal\si2-g2-backend-fastapi\.venv\Lib\site-packages\openai\_base_client.py", line 1064, in _request
+    raise self._make_status_error_from_response(err.response) from None
+openai.BadRequestError: Error code: 400 - {'error': {'message': "Unsupported parameter: 'max_tokens' is not supported with this model. Use 'max_completion_tokens' instead.", 'type': 'invalid_request_error', 'param': 'max_tokens', 'code': 'unsupported_parameter'}}
+2026-06-08 23:19:54 | WARNING  | app.access | POST /api/ia/reporte/nl-a-reporte 502 | 2666.2ms | ip=127.0.0.1
+2026-06-08 23:21:05 | INFO     | app.main | FastAPI shutting down
+2026-06-08 23:21:06 | INFO     | app.main | FastAPI started — environment=development port=8001 model=gpt-5.4-mini
+2026-06-08 23:21:07 | INFO     | app.main | FastAPI started — environment=development port=8001 model=gpt-5.4-mini
+2026-06-08 23:21:16 | INFO     | app.dependencies | verify_jwt: OK user_id=robertocervantes@gmail.com id_institucion=df679c57-39ec-44ba-8af5-4c72874bd298 roles=['ADMIN_INSTITUCION']
+2026-06-08 23:21:16 | INFO     | app.routers.reporte_ia | nl_a_reporte: consulta=Muéstrame los 10 alumnos con mejor promedio en matemáticas del segundo trimestre
+2026-06-08 23:21:18 | INFO     | app.routers.reporte_ia | nl_a_reporte: calling OpenAI model=gpt-5.4-mini
+2026-06-08 23:21:19 | INFO     | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-08 23:21:19 | INFO     | app.routers.reporte_ia | nl_a_reporte: OpenAI OK codigo=RENDIMIENTO_ACADEMICO_CURSO confianza=0.93
+2026-06-08 23:21:19 | INFO     | app.access | POST /api/ia/reporte/nl-a-reporte 200 | 2934.5ms | ip=127.0.0.1
+2026-06-08 23:21:21 | INFO     | app.dependencies | verify_jwt: OK user_id=robertocervantes@gmail.com id_institucion=df679c57-39ec-44ba-8af5-4c72874bd298 roles=['ADMIN_INSTITUCION']
+2026-06-08 23:21:21 | INFO     | app.routers.reporte_ia | nl_a_reporte: consulta=Muéstrame los 10 alumnos con mejor promedio en matemáticas del segundo trimestre
+2026-06-08 23:21:21 | INFO     | app.routers.reporte_ia | nl_a_reporte: calling OpenAI model=gpt-5.4-mini
+2026-06-08 23:21:22 | INFO     | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-08 23:21:22 | INFO     | app.routers.reporte_ia | nl_a_reporte: OpenAI OK codigo=RENDIMIENTO_ACADEMICO_CURSO confianza=0.94
+2026-06-08 23:21:22 | INFO     | app.access | POST /api/ia/reporte/nl-a-reporte 200 | 1406.2ms | ip=127.0.0.1
+2026-06-10 12:43:59 | INFO     | app.main | FastAPI shutting down
+2026-06-10 12:44:06 | INFO     | app.main | FastAPI started — environment=development port=8001 model=gpt-5.4-mini

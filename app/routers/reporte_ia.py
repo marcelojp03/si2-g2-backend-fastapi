@@ -3,6 +3,7 @@ Router: Interpretación de lenguaje natural a filtros de reporte.
 Sprint 3/4 — requiere OPENAI_API_KEY configurado.
 """
 import json
+import logging
 
 from fastapi import APIRouter, Depends, HTTPException
 
@@ -16,6 +17,8 @@ from app.schemas.ia_schemas import (
 )
 from app.dependencies import verify_jwt
 from app.config import settings
+
+logger = logging.getLogger(__name__)
 
 router = APIRouter(prefix="/api/ia", tags=["Reportes IA"])
 
@@ -51,13 +54,17 @@ async def interpretar_consulta(
 
     Ejemplo de texto: "estudiantes con menos del 60% de asistencia en matemáticas este semestre"
     """
+    logger.info("interpretar_consulta: entidad=%s texto=%s", body.entidad, body.texto)
+
     if not settings.openai_api_key:
+        logger.warning("interpretar_consulta: OPENAI_API_KEY no configurado")
         raise HTTPException(status_code=501, detail="OPENAI_API_KEY no configurado")
 
     try:
         from openai import OpenAI  # type: ignore
         client = OpenAI(api_key=settings.openai_api_key)
 
+        logger.info("interpretar_consulta: calling OpenAI model=%s", settings.openai_model)
         respuesta = client.chat.completions.create(
             model=settings.openai_model,
             messages=[
@@ -68,23 +75,29 @@ async def interpretar_consulta(
                 },
             ],
             temperature=0,
-            max_tokens=512,
+            max_completion_tokens=512,
         )
 
         contenido = respuesta.choices[0].message.content or "{}"
         parsed = json.loads(contenido)
 
+        confianza = float(parsed.get("confianza", 0.0))
+        logger.info("interpretar_consulta: OpenAI OK confianza=%.2f filtros=%d",
+                     confianza, len(parsed.get("filtros", [])))
+
         data = InterpretacionResponse(
             filtros=[FiltroReporte(**f) for f in parsed.get("filtros", [])],
             columnas_sugeridas=parsed.get("columnas_sugeridas", []),
-            confianza=float(parsed.get("confianza", 0.0)),
+            confianza=confianza,
             texto_original=body.texto,
         )
         return ApiResponse.ok("Interpretación completada", data.model_dump())
 
     except json.JSONDecodeError:
+        logger.error("interpretar_consulta: OpenAI returned invalid JSON: %s", contenido)
         raise HTTPException(status_code=422, detail="La IA devolvió JSON inválido")
     except Exception as exc:
+        logger.error("interpretar_consulta: OpenAI error — %s", exc, exc_info=True)
         raise HTTPException(status_code=502, detail=f"Error al comunicarse con OpenAI: {exc}")
 
 
@@ -165,13 +178,17 @@ async def nl_a_reporte(
     El backend Spring Boot llama a este endpoint y luego resuelve los nombres de entidades
     (materia_query, curso_query, docente_query) a UUIDs multi-tenant de forma segura.
     """
+    logger.info("nl_a_reporte: consulta=%s", body.consulta)
+
     if not settings.openai_api_key:
+        logger.warning("nl_a_reporte: OPENAI_API_KEY no configurado")
         raise HTTPException(status_code=501, detail="OPENAI_API_KEY no configurado")
 
     try:
         from openai import OpenAI  # type: ignore
         client = OpenAI(api_key=settings.openai_api_key)
 
+        logger.info("nl_a_reporte: calling OpenAI model=%s", settings.openai_model)
         respuesta = client.chat.completions.create(
             model=settings.openai_model,
             messages=[
@@ -179,24 +196,30 @@ async def nl_a_reporte(
                 {"role": "user", "content": body.consulta},
             ],
             temperature=0,
-            max_tokens=512,
+            max_completion_tokens=512,
         )
 
         contenido = respuesta.choices[0].message.content or "{}"
         parsed = json.loads(contenido)
 
+        codigo = parsed.get("codigo_reporte", "ERROR")
+        confianza = float(parsed.get("confianza", 0.0))
+        logger.info("nl_a_reporte: OpenAI OK codigo=%s confianza=%.2f", codigo, confianza)
+
         data = NlAReporteResponse(
-            codigo_reporte=parsed.get("codigo_reporte", "ERROR"),
+            codigo_reporte=codigo,
             filtros=parsed.get("filtros", {}),
             materia_query=parsed.get("materia_query") or None,
             curso_query=parsed.get("curso_query") or None,
             docente_query=parsed.get("docente_query") or None,
-            confianza=float(parsed.get("confianza", 0.0)),
+            confianza=confianza,
             mensaje_error=parsed.get("mensaje_error") or None,
         )
         return ApiResponse.ok("Consulta interpretada", data.model_dump())
 
     except json.JSONDecodeError:
+        logger.error("nl_a_reporte: OpenAI returned invalid JSON: %s", contenido)
         raise HTTPException(status_code=422, detail="La IA devolvió JSON inválido")
     except Exception as exc:
+        logger.error("nl_a_reporte: OpenAI error — %s", exc, exc_info=True)
         raise HTTPException(status_code=502, detail=f"Error al comunicarse con OpenAI: {exc}")
