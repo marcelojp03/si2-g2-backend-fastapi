@@ -57,3 +57,575 @@ openai.BadRequestError: Error code: 400 - {'error': {'message': "Unsupported par
 2026-06-08 23:21:22 | INFO     | app.access | POST /api/ia/reporte/nl-a-reporte 200 | 1406.2ms | ip=127.0.0.1
 2026-06-10 12:43:59 | INFO     | app.main | FastAPI shutting down
 2026-06-10 12:44:06 | INFO     | app.main | FastAPI started — environment=development port=8001 model=gpt-5.4-mini
+2026-06-17 12:36:39 | INFO     | app.main | FastAPI started — environment=development port=8001 model=gpt-5.4-mini
+2026-06-17 12:39:45 | INFO     | app.dependencies | verify_jwt: OK user_id=robertocervantes@gmail.com id_institucion=df679c57-39ec-44ba-8af5-4c72874bd298 roles=['ADMIN_INSTITUCION']
+2026-06-17 12:39:45 | INFO     | app.routers.consulta_natural | consulta_natural: id_institucion=df679c57-39ec-44ba-8af5-4c72874bd298 consulta=Muéstrame los 10 alumnos con mejor promedio en matemáticas del segundo trimestre limit=100
+2026-06-17 12:39:45 | INFO     | app.routers.consulta_natural | _generate_sql: id_institucion=df679c57-39ec-44ba-8af5-4c72874bd298 limit=100 consulta=Muéstrame los 10 alumnos con mejor promedio en matemáticas del segundo trimestre
+2026-06-17 12:39:47 | INFO     | app.routers.consulta_natural | _generate_sql: calling OpenAI model=gpt-5.4-mini
+2026-06-17 12:39:49 | INFO     | openai._base_client | Retrying request to /chat/completions in 0.496993 seconds
+2026-06-17 12:39:51 | INFO     | openai._base_client | Retrying request to /chat/completions in 0.821618 seconds
+2026-06-17 12:39:54 | WARNING  | app.access | POST /api/ia/reporte/consulta-natural 500 | 9126.2ms | ip=127.0.0.1
+2026-06-17 12:39:55 | ERROR    | app.middlewares.error_handler | Unhandled error: Connection error.
+Traceback (most recent call last):
+  File "C:\UAGRM\Sistemas de informacion 2\semestre-1-2026\proyecto grupal\si2-g2-backend-fastapi\.venv\Lib\site-packages\httpx\_transports\default.py", line 101, in map_httpcore_exceptions
+    yield
+  File "C:\UAGRM\Sistemas de informacion 2\semestre-1-2026\proyecto grupal\si2-g2-backend-fastapi\.venv\Lib\site-packages\httpx\_transports\default.py", line 394, in handle_async_request
+    resp = await self._pool.handle_async_request(req)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\UAGRM\Sistemas de informacion 2\semestre-1-2026\proyecto grupal\si2-g2-backend-fastapi\.venv\Lib\site-packages\httpcore\_async\connection_pool.py", line 256, in handle_async_request
+    raise exc from None
+  File "C:\UAGRM\Sistemas de informacion 2\semestre-1-2026\proyecto grupal\si2-g2-backend-fastapi\.venv\Lib\site-packages\httpcore\_async\connection_pool.py", line 236, in handle_async_request
+    response = await connection.handle_async_request(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        pool_request.request
+        ^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\UAGRM\Sistemas de informacion 2\semestre-1-2026\proyecto grupal\si2-g2-backend-fastapi\.venv\Lib\site-packages\httpcore\_async\connection.py", line 101, in handle_async_request
+    raise exc
+  File "C:\UAGRM\Sistemas de informacion 2\semestre-1-2026\proyecto grupal\si2-g2-backend-fastapi\.venv\Lib\site-packages\httpcore\_async\connection.py", line 78, in handle_async_request
+    stream = await self._connect(request)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\UAGRM\Sistemas de informacion 2\semestre-1-2026\proyecto grupal\si2-g2-backend-fastapi\.venv\Lib\site-packages\httpcore\_async\connection.py", line 124, in _connect
+    stream = await self._network_backend.connect_tcp(**kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\UAGRM\Sistemas de informacion 2\semestre-1-2026\proyecto grupal\si2-g2-backend-fastapi\.venv\Lib\site-packages\httpcore\_backends\auto.py", line 31, in connect_tcp
+    return await self._backend.connect_tcp(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<5 lines>...
+    )
+    ^
+  File "C:\UAGRM\Sistemas de informacion 2\semestre-1-2026\proyecto grupal\si2-g2-backend-fastapi\.venv\Lib\site-packages\httpcore\_backends\anyio.py", line 113, in connect_tcp
+    with map_exceptions(exc_map):
+         ~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Python314\Lib\contextlib.py", line 162, in __exit__
+    self.gen.throw(value)
+    ~~~~~~~~~~~~~~^^^^^^^
+  File "C:\UAGRM\Sistemas de informacion 2\semestre-1-2026\proyecto grupal\si2-g2-backend-fastapi\.venv\Lib\site-packages\httpcore\_exceptions.py", line 14, in map_exceptions
+    raise to_exc(exc) from exc
+httpcore.ConnectError: All connection attempts failed
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\UAGRM\Sistemas de informacion 2\semestre-1-2026\proyecto grupal\si2-g2-backend-fastapi\.venv\Lib\site-packages\openai\_base_client.py", line 1582, in _request
+    response = await self._client.send(
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "C:\UAGRM\Sistemas de informacion 2\semestre-1-2026\proyecto grupal\si2-g2-backend-fastapi\.venv\Lib\site-packages\httpx\_client.py", line 1629, in send
+    response = await self._send_handling_auth(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<4 lines>...
+    )
+    ^
+  File "C:\UAGRM\Sistemas de informacion 2\semestre-1-2026\proyecto grupal\si2-g2-backend-fastapi\.venv\Lib\site-packages\httpx\_client.py", line 1657, in _send_handling_auth
+    response = await self._send_handling_redirects(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "C:\UAGRM\Sistemas de informacion 2\semestre-1-2026\proyecto grupal\si2-g2-backend-fastapi\.venv\Lib\site-packages\httpx\_client.py", line 1694, in _send_handling_redirects
+    response = await self._send_single_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\UAGRM\Sistemas de informacion 2\semestre-1-2026\proyecto grupal\si2-g2-backend-fastapi\.venv\Lib\site-packages\httpx\_client.py", line 1730, in _send_single_request
+    response = await transport.handle_async_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\UAGRM\Sistemas de informacion 2\semestre-1-2026\proyecto grupal\si2-g2-backend-fastapi\.venv\Lib\site-packages\httpx\_transports\default.py", line 393, in handle_async_request
+    with map_httpcore_exceptions():
+         ~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Python314\Lib\contextlib.py", line 162, in __exit__
+    self.gen.throw(value)
+    ~~~~~~~~~~~~~~^^^^^^^
+  File "C:\UAGRM\Sistemas de informacion 2\semestre-1-2026\proyecto grupal\si2-g2-backend-fastapi\.venv\Lib\site-packages\httpx\_transports\default.py", line 118, in map_httpcore_exceptions
+    raise mapped_exc(message) from exc
+httpx.ConnectError: All connection attempts failed
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\UAGRM\Sistemas de informacion 2\semestre-1-2026\proyecto grupal\si2-g2-backend-fastapi\app\middlewares\error_handler.py", line 15, in dispatch
+    return await call_next(request)
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\UAGRM\Sistemas de informacion 2\semestre-1-2026\proyecto grupal\si2-g2-backend-fastapi\.venv\Lib\site-packages\starlette\middleware\base.py", line 163, in call_next
+    raise app_exc
+  File "C:\UAGRM\Sistemas de informacion 2\semestre-1-2026\proyecto grupal\si2-g2-backend-fastapi\.venv\Lib\site-packages\starlette\middleware\base.py", line 149, in coro
+    await self.app(scope, receive_or_disconnect, send_no_error)
+  File "C:\UAGRM\Sistemas de informacion 2\semestre-1-2026\proyecto grupal\si2-g2-backend-fastapi\.venv\Lib\site-packages\starlette\middleware\base.py", line 185, in __call__
+    with collapse_excgroups():
+         ~~~~~~~~~~~~~~~~~~^^
+  File "C:\Python314\Lib\contextlib.py", line 162, in __exit__
+    self.gen.throw(value)
+    ~~~~~~~~~~~~~~^^^^^^^
+  File "C:\UAGRM\Sistemas de informacion 2\semestre-1-2026\proyecto grupal\si2-g2-backend-fastapi\.venv\Lib\site-packages\starlette\_utils.py", line 82, in collapse_excgroups
+    raise exc
+  File "C:\UAGRM\Sistemas de informacion 2\semestre-1-2026\proyecto grupal\si2-g2-backend-fastapi\.venv\Lib\site-packages\starlette\middleware\base.py", line 187, in __call__
+    response = await self.dispatch_func(request, call_next)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\UAGRM\Sistemas de informacion 2\semestre-1-2026\proyecto grupal\si2-g2-backend-fastapi\app\middlewares\access_log.py", line 20, in dispatch
+    response = await call_next(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\UAGRM\Sistemas de informacion 2\semestre-1-2026\proyecto grupal\si2-g2-backend-fastapi\.venv\Lib\site-packages\starlette\middleware\base.py", line 163, in call_next
+    raise app_exc
+  File "C:\UAGRM\Sistemas de informacion 2\semestre-1-2026\proyecto grupal\si2-g2-backend-fastapi\.venv\Lib\site-packages\starlette\middleware\base.py", line 149, in coro
+    await self.app(scope, receive_or_disconnect, send_no_error)
+  File "C:\UAGRM\Sistemas de informacion 2\semestre-1-2026\proyecto grupal\si2-g2-backend-fastapi\.venv\Lib\site-packages\starlette\middleware\cors.py", line 85, in __call__
+    await self.app(scope, receive, send)
+  File "C:\UAGRM\Sistemas de informacion 2\semestre-1-2026\proyecto grupal\si2-g2-backend-fastapi\.venv\Lib\site-packages\starlette\middleware\exceptions.py", line 62, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "C:\UAGRM\Sistemas de informacion 2\semestre-1-2026\proyecto grupal\si2-g2-backend-fastapi\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "C:\UAGRM\Sistemas de informacion 2\semestre-1-2026\proyecto grupal\si2-g2-backend-fastapi\.venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "C:\UAGRM\Sistemas de informacion 2\semestre-1-2026\proyecto grupal\si2-g2-backend-fastapi\.venv\Lib\site-packages\starlette\routing.py", line 715, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "C:\UAGRM\Sistemas de informacion 2\semestre-1-2026\proyecto grupal\si2-g2-backend-fastapi\.venv\Lib\site-packages\starlette\routing.py", line 735, in app
+    await route.handle(scope, receive, send)
+  File "C:\UAGRM\Sistemas de informacion 2\semestre-1-2026\proyecto grupal\si2-g2-backend-fastapi\.venv\Lib\site-packages\starlette\routing.py", line 288, in handle
+    await self.app(scope, receive, send)
+  File "C:\UAGRM\Sistemas de informacion 2\semestre-1-2026\proyecto grupal\si2-g2-backend-fastapi\.venv\Lib\site-packages\starlette\routing.py", line 76, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "C:\UAGRM\Sistemas de informacion 2\semestre-1-2026\proyecto grupal\si2-g2-backend-fastapi\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "C:\UAGRM\Sistemas de informacion 2\semestre-1-2026\proyecto grupal\si2-g2-backend-fastapi\.venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "C:\UAGRM\Sistemas de informacion 2\semestre-1-2026\proyecto grupal\si2-g2-backend-fastapi\.venv\Lib\site-packages\starlette\routing.py", line 73, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "C:\UAGRM\Sistemas de informacion 2\semestre-1-2026\proyecto grupal\si2-g2-backend-fastapi\.venv\Lib\site-packages\fastapi\routing.py", line 301, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "C:\UAGRM\Sistemas de informacion 2\semestre-1-2026\proyecto grupal\si2-g2-backend-fastapi\.venv\Lib\site-packages\fastapi\routing.py", line 212, in run_endpoint_function
+    return await dependant.call(**values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\UAGRM\Sistemas de informacion 2\semestre-1-2026\proyecto grupal\si2-g2-backend-fastapi\app\routers\consulta_natural.py", line 242, in consulta_natural
+    sql = await _generate_sql(body.consulta, id_institucion, limit)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\UAGRM\Sistemas de informacion 2\semestre-1-2026\proyecto grupal\si2-g2-backend-fastapi\app\routers\consulta_natural.py", line 145, in _generate_sql
+    resp = await client.chat.completions.create(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<7 lines>...
+    )
+    ^
+  File "C:\UAGRM\Sistemas de informacion 2\semestre-1-2026\proyecto grupal\si2-g2-backend-fastapi\.venv\Lib\site-packages\openai\resources\chat\completions.py", line 1720, in create
+    return await self._post(
+           ^^^^^^^^^^^^^^^^^
+    ...<42 lines>...
+    )
+    ^
+  File "C:\UAGRM\Sistemas de informacion 2\semestre-1-2026\proyecto grupal\si2-g2-backend-fastapi\.venv\Lib\site-packages\openai\_base_client.py", line 1849, in post
+    return await self.request(cast_to, opts, stream=stream, stream_cls=stream_cls)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\UAGRM\Sistemas de informacion 2\semestre-1-2026\proyecto grupal\si2-g2-backend-fastapi\.venv\Lib\site-packages\openai\_base_client.py", line 1543, in request
+    return await self._request(
+           ^^^^^^^^^^^^^^^^^^^^
+    ...<5 lines>...
+    )
+    ^
+  File "C:\UAGRM\Sistemas de informacion 2\semestre-1-2026\proyecto grupal\si2-g2-backend-fastapi\.venv\Lib\site-packages\openai\_base_client.py", line 1606, in _request
+    return await self._retry_request(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+    )
+    ^
+  File "C:\UAGRM\Sistemas de informacion 2\semestre-1-2026\proyecto grupal\si2-g2-backend-fastapi\.venv\Lib\site-packages\openai\_base_client.py", line 1676, in _retry_request
+    return await self._request(
+           ^^^^^^^^^^^^^^^^^^^^
+    ...<5 lines>...
+    )
+    ^
+  File "C:\UAGRM\Sistemas de informacion 2\semestre-1-2026\proyecto grupal\si2-g2-backend-fastapi\.venv\Lib\site-packages\openai\_base_client.py", line 1606, in _request
+    return await self._retry_request(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+    )
+    ^
+  File "C:\UAGRM\Sistemas de informacion 2\semestre-1-2026\proyecto grupal\si2-g2-backend-fastapi\.venv\Lib\site-packages\openai\_base_client.py", line 1676, in _retry_request
+    return await self._request(
+           ^^^^^^^^^^^^^^^^^^^^
+    ...<5 lines>...
+    )
+    ^
+  File "C:\UAGRM\Sistemas de informacion 2\semestre-1-2026\proyecto grupal\si2-g2-backend-fastapi\.venv\Lib\site-packages\openai\_base_client.py", line 1616, in _request
+    raise APIConnectionError(request=request) from err
+openai.APIConnectionError: Connection error.
+
+2026-06-17 12:40:04 | INFO     | app.main | FastAPI shutting down
+2026-06-17 12:47:08 | INFO     | app.main | FastAPI started — environment=development port=8001 model=gpt-5.4-mini
+2026-06-17 12:47:14 | INFO     | app.dependencies | verify_jwt: OK user_id=robertocervantes@gmail.com id_institucion=df679c57-39ec-44ba-8af5-4c72874bd298 roles=['ADMIN_INSTITUCION']
+2026-06-17 12:47:14 | INFO     | app.routers.consulta_natural | consulta_natural: id_institucion=df679c57-39ec-44ba-8af5-4c72874bd298 consulta=Muéstrame los 10 alumnos con mejor promedio en matemáticas del segundo trimestre limit=100
+2026-06-17 12:47:14 | INFO     | app.routers.consulta_natural | _generate_sql: id_institucion=df679c57-39ec-44ba-8af5-4c72874bd298 limit=100 consulta=Muéstrame los 10 alumnos con mejor promedio en matemáticas del segundo trimestre
+2026-06-17 12:47:15 | INFO     | app.routers.consulta_natural | _generate_sql: calling OpenAI model=gpt-5.4-mini
+2026-06-17 12:47:20 | INFO     | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-17 12:47:20 | INFO     | app.routers.consulta_natural | _generate_sql: SQL generated (874 chars): SELECT e.id, e.codigo_estudiante, e.nombres, e.apellidos, AVG(ca.nota_obtenida) AS promedio_matematicas
+FROM sia.calificacion_actividad ca
+JOIN sia.actividad_evaluativa ae ON ae.id = ca.id_actividad
+JOIN sia.estudiante e ON e.id = ca.id_estudiante
+JOIN sia.periodo_evaluacion pe ON pe.id = ae.id_peri
+2026-06-17 12:47:20 | INFO     | app.routers.consulta_natural | _execute_sql: executing query (874 chars)
+2026-06-17 12:47:22 | INFO     | app.routers.consulta_natural | _execute_sql: 100 rows returned
+2026-06-17 12:47:22 | INFO     | app.access | POST /api/ia/reporte/consulta-natural 200 | 7447.3ms | ip=127.0.0.1
+2026-06-17 12:47:22 | INFO     | app.dependencies | verify_jwt: OK user_id=robertocervantes@gmail.com id_institucion=df679c57-39ec-44ba-8af5-4c72874bd298 roles=['ADMIN_INSTITUCION']
+2026-06-17 12:47:22 | INFO     | app.routers.reporte_ia | nl_a_reporte: consulta=Muéstrame los 10 alumnos con mejor promedio en matemáticas del segundo trimestre
+2026-06-17 12:47:23 | INFO     | app.routers.reporte_ia | nl_a_reporte: calling OpenAI model=gpt-5.4-mini
+2026-06-17 12:47:24 | INFO     | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-17 12:47:24 | INFO     | app.routers.reporte_ia | nl_a_reporte: OpenAI OK codigo=RENDIMIENTO_ACADEMICO_CURSO confianza=0.93
+2026-06-17 12:47:24 | INFO     | app.access | POST /api/ia/reporte/nl-a-reporte 200 | 1952.0ms | ip=127.0.0.1
+2026-06-17 12:59:54 | INFO     | app.dependencies | verify_jwt: OK user_id=robertocervantes@gmail.com id_institucion=df679c57-39ec-44ba-8af5-4c72874bd298 roles=['ADMIN_INSTITUCION']
+2026-06-17 12:59:54 | INFO     | app.routers.reporte_ia | nl_a_reporte: consulta=Muéstrame los 10 alumnos con mejor promedio en matemáticas del segundo trimestre
+2026-06-17 12:59:54 | INFO     | app.routers.reporte_ia | nl_a_reporte: calling OpenAI model=gpt-5.4-mini
+2026-06-17 12:59:58 | INFO     | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-17 12:59:58 | INFO     | app.routers.reporte_ia | nl_a_reporte: OpenAI OK codigo=RENDIMIENTO_ACADEMICO_CURSO confianza=0.93
+2026-06-17 12:59:58 | INFO     | app.access | POST /api/ia/reporte/nl-a-reporte 200 | 3416.8ms | ip=127.0.0.1
+2026-06-17 13:02:08 | INFO     | app.dependencies | verify_jwt: OK user_id=robertocervantes@gmail.com id_institucion=df679c57-39ec-44ba-8af5-4c72874bd298 roles=['ADMIN_INSTITUCION']
+2026-06-17 13:02:08 | INFO     | app.routers.consulta_natural | consulta_natural: id_institucion=df679c57-39ec-44ba-8af5-4c72874bd298 consulta=Muéstrame los 10 alumnos con mejor promedio en matemáticas del segundo trimestre limit=100
+2026-06-17 13:02:08 | INFO     | app.routers.consulta_natural | _generate_sql: id_institucion=df679c57-39ec-44ba-8af5-4c72874bd298 limit=100 consulta=Muéstrame los 10 alumnos con mejor promedio en matemáticas del segundo trimestre
+2026-06-17 13:02:08 | INFO     | app.routers.consulta_natural | _generate_sql: calling OpenAI model=gpt-5.4-mini
+2026-06-17 13:02:11 | INFO     | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-17 13:02:11 | INFO     | app.routers.consulta_natural | _generate_sql: SQL generated (888 chars): SELECT e.id, e.codigo_estudiante, e.nombres, e.apellidos, AVG(ca.nota_obtenida) AS promedio_matematicas
+FROM sia.calificacion_actividad ca
+JOIN sia.actividad_evaluativa ae ON ae.id = ca.id_actividad
+JOIN sia.estudiante e ON e.id = ca.id_estudiante
+JOIN sia.periodo_evaluacion pe ON pe.id = ae.id_peri
+2026-06-17 13:02:11 | INFO     | app.routers.consulta_natural | _execute_sql: executing query (888 chars)
+2026-06-17 13:02:12 | ERROR    | app.routers.consulta_natural | _execute_sql: PostgresError — syntax error at or near "LIMIT"
+2026-06-17 13:02:12 | WARNING  | app.routers.consulta_natural | consulta_natural: error inicial, intentando correccion — syntax error at or near "LIMIT"
+2026-06-17 13:02:12 | WARNING  | app.routers.consulta_natural | _correct_sql: error=syntax error at or near "LIMIT" bad_sql=SELECT e.id, e.codigo_estudiante, e.nombres, e.apellidos, AVG(ca.nota_obtenida) AS promedio_matematicas
+FROM sia.calificacion_actividad ca
+JOIN sia.actividad_evaluativa ae ON ae.id = ca.id_actividad
+J
+2026-06-17 13:02:15 | INFO     | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-17 13:02:15 | INFO     | app.routers.consulta_natural | _correct_sql: corrected SQL (879 chars): SELECT e.id, e.codigo_estudiante, e.nombres, e.apellidos, AVG(ca.nota_obtenida) AS promedio_matematicas
+FROM sia.calificacion_actividad ca
+JOIN sia.actividad_evaluativa ae ON ae.id = ca.id_actividad
+J
+2026-06-17 13:02:15 | INFO     | app.routers.consulta_natural | _execute_sql: executing query (879 chars)
+2026-06-17 13:02:16 | INFO     | app.access | POST /api/ia/reporte/consulta-natural 200 | 8541.7ms | ip=127.0.0.1
+2026-06-17 13:02:17 | INFO     | app.dependencies | verify_jwt: OK user_id=robertocervantes@gmail.com id_institucion=df679c57-39ec-44ba-8af5-4c72874bd298 roles=['ADMIN_INSTITUCION']
+2026-06-17 13:02:17 | INFO     | app.routers.reporte_ia | nl_a_reporte: consulta=Muéstrame los 10 alumnos con mejor promedio en matemáticas del segundo trimestre
+2026-06-17 13:02:17 | INFO     | app.routers.reporte_ia | nl_a_reporte: calling OpenAI model=gpt-5.4-mini
+2026-06-17 13:02:18 | INFO     | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-17 13:02:18 | INFO     | app.routers.reporte_ia | nl_a_reporte: OpenAI OK codigo=RENDIMIENTO_ACADEMICO_CURSO confianza=0.93
+2026-06-17 13:02:18 | INFO     | app.access | POST /api/ia/reporte/nl-a-reporte 200 | 1464.0ms | ip=127.0.0.1
+2026-06-17 13:03:54 | INFO     | app.dependencies | verify_jwt: OK user_id=robertocervantes@gmail.com id_institucion=df679c57-39ec-44ba-8af5-4c72874bd298 roles=['ADMIN_INSTITUCION']
+2026-06-17 13:03:54 | INFO     | app.routers.consulta_natural | consulta_natural: id_institucion=df679c57-39ec-44ba-8af5-4c72874bd298 consulta=Docentes agrupados por materia limit=100
+2026-06-17 13:03:54 | INFO     | app.routers.consulta_natural | _generate_sql: id_institucion=df679c57-39ec-44ba-8af5-4c72874bd298 limit=100 consulta=Docentes agrupados por materia
+2026-06-17 13:03:55 | INFO     | app.routers.consulta_natural | _generate_sql: calling OpenAI model=gpt-5.4-mini
+2026-06-17 13:03:57 | INFO     | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-17 13:03:57 | INFO     | app.routers.consulta_natural | _generate_sql: SQL generated (604 chars): SELECT
+  m.id AS id_materia,
+  m.codigo AS codigo_materia,
+  m.nombre AS materia,
+  d.id AS id_docente,
+  d.codigo AS codigo_docente,
+  d.nombres,
+  d.apellidos,
+  COUNT(ad.id) AS total_asignaciones
+FROM sia.asignacion_docente ad
+JOIN sia.materia m
+  ON m.id = ad.id_materia
+ AND m.id_institucion = a
+2026-06-17 13:03:57 | INFO     | app.routers.consulta_natural | _execute_sql: executing query (604 chars)
+2026-06-17 13:03:59 | INFO     | app.routers.consulta_natural | _execute_sql: 100 rows returned
+2026-06-17 13:03:59 | INFO     | app.access | POST /api/ia/reporte/consulta-natural 200 | 4554.2ms | ip=127.0.0.1
+2026-06-17 13:03:59 | INFO     | app.main | FastAPI shutting down
+2026-06-17 13:04:00 | INFO     | app.main | FastAPI started — environment=development port=8001 model=gpt-5.4-mini
+2026-06-17 13:04:26 | INFO     | app.main | FastAPI shutting down
+2026-06-17 13:04:27 | INFO     | app.main | FastAPI started — environment=development port=8001 model=gpt-5.4-mini
+2026-06-17 13:08:58 | INFO     | app.dependencies | verify_jwt: OK user_id=robertocervantes@gmail.com id_institucion=df679c57-39ec-44ba-8af5-4c72874bd298 roles=['ADMIN_INSTITUCION']
+2026-06-17 13:08:58 | INFO     | app.routers.consulta_natural | consulta_natural: id_institucion=df679c57-39ec-44ba-8af5-4c72874bd298 consulta=Docentes agrupados por materia limit=100
+2026-06-17 13:08:58 | INFO     | app.routers.consulta_natural | _generate_sql: id_institucion=df679c57-39ec-44ba-8af5-4c72874bd298 limit=100 consulta=Docentes agrupados por materia
+2026-06-17 13:08:59 | INFO     | app.routers.consulta_natural | _generate_sql: calling OpenAI model=gpt-5.4-mini
+2026-06-17 13:09:03 | INFO     | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-17 13:09:03 | INFO     | app.routers.consulta_natural | _generate_sql: SQL generated (563 chars): SELECT
+  m.id AS id_materia,
+  m.codigo AS codigo_materia,
+  m.nombre AS materia,
+  d.id AS id_docente,
+  d.codigo AS codigo_docente,
+  d.nombres,
+  d.apellidos,
+  ad.carga_horaria
+FROM sia.asignacion_docente ad
+JOIN sia.materia m
+  ON m.id = ad.id_materia
+ AND m.id_institucion = 'df679c57-39ec-44ba
+2026-06-17 13:09:03 | INFO     | app.routers.consulta_natural | _execute_sql: executing query (563 chars)
+2026-06-17 13:09:04 | INFO     | app.routers.consulta_natural | _execute_sql: 100 rows returned
+2026-06-17 13:09:04 | INFO     | app.access | POST /api/ia/reporte/consulta-natural 200 | 6352.1ms | ip=127.0.0.1
+2026-06-17 13:09:04 | INFO     | app.main | FastAPI shutting down
+2026-06-17 13:09:05 | INFO     | app.main | FastAPI started — environment=development port=8001 model=gpt-5.4-mini
+2026-06-17 13:11:39 | INFO     | app.dependencies | verify_jwt: OK user_id=robertocervantes@gmail.com id_institucion=df679c57-39ec-44ba-8af5-4c72874bd298 roles=['ADMIN_INSTITUCION']
+2026-06-17 13:11:39 | INFO     | app.routers.consulta_natural | consulta_natural: id_institucion=df679c57-39ec-44ba-8af5-4c72874bd298 consulta=Muéstrame los 10 alumnos con mejor promedio en matemáticas del segundo trimestre limit=100
+2026-06-17 13:11:39 | INFO     | app.routers.consulta_natural | _generate_sql: id_institucion=df679c57-39ec-44ba-8af5-4c72874bd298 limit=100 consulta=Muéstrame los 10 alumnos con mejor promedio en matemáticas del segundo trimestre
+2026-06-17 13:11:40 | INFO     | app.routers.consulta_natural | _generate_sql: calling OpenAI model=gpt-5.4-mini
+2026-06-17 13:11:42 | INFO     | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-17 13:11:42 | INFO     | app.routers.consulta_natural | _generate_sql: SQL generated (606 chars): SELECT e.id, e.codigo_estudiante, e.nombres, e.apellidos, AVG(ca.nota_obtenida) AS promedio_matematicas
+FROM sia.calificacion_actividad ca
+JOIN sia.actividad_evaluativa ae ON ae.id = ca.id_actividad
+JOIN sia.materia m ON m.id = ae.id_materia
+JOIN sia.estudiante e ON e.id = ca.id_estudiante
+JOIN sia.
+2026-06-17 13:11:42 | INFO     | app.routers.consulta_natural | _execute_sql: executing query (606 chars)
+2026-06-17 13:11:44 | ERROR    | app.routers.consulta_natural | _execute_sql: PostgresError — syntax error at or near "LIMIT"
+2026-06-17 13:11:44 | WARNING  | app.routers.consulta_natural | consulta_natural: error inicial, intentando correccion — syntax error at or near "LIMIT"
+2026-06-17 13:11:44 | WARNING  | app.routers.consulta_natural | _correct_sql: error=syntax error at or near "LIMIT" bad_sql=SELECT e.id, e.codigo_estudiante, e.nombres, e.apellidos, AVG(ca.nota_obtenida) AS promedio_matematicas
+FROM sia.calificacion_actividad ca
+JOIN sia.actividad_evaluativa ae ON ae.id = ca.id_actividad
+J
+2026-06-17 13:11:47 | INFO     | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-17 13:11:47 | INFO     | app.routers.consulta_natural | _correct_sql: corrected SQL (879 chars): SELECT e.id, e.codigo_estudiante, e.nombres, e.apellidos, AVG(ca.nota_obtenida) AS promedio_matematicas
+FROM sia.calificacion_actividad ca
+JOIN sia.actividad_evaluativa ae ON ae.id = ca.id_actividad
+J
+2026-06-17 13:11:47 | INFO     | app.routers.consulta_natural | _execute_sql: executing query (879 chars)
+2026-06-17 13:11:48 | INFO     | app.access | POST /api/ia/reporte/consulta-natural 200 | 8925.9ms | ip=127.0.0.1
+2026-06-17 13:14:04 | INFO     | app.main | FastAPI shutting down
+2026-06-17 13:14:05 | INFO     | app.main | FastAPI started — environment=development port=8001 model=gpt-5.4-mini
+2026-06-17 13:14:06 | INFO     | app.main | FastAPI started — environment=development port=8001 model=gpt-5.4-mini
+2026-06-17 13:14:57 | INFO     | app.dependencies | verify_jwt: OK user_id=robertocervantes@gmail.com id_institucion=df679c57-39ec-44ba-8af5-4c72874bd298 roles=['ADMIN_INSTITUCION']
+2026-06-17 13:14:57 | INFO     | app.routers.consulta_natural | consulta_natural: id_institucion=df679c57-39ec-44ba-8af5-4c72874bd298 consulta=Muéstrame los 10 alumnos con mejor promedio en matemáticas del segundo trimestre limit=100
+2026-06-17 13:14:57 | INFO     | app.routers.consulta_natural | _generate_sql: id_institucion=df679c57-39ec-44ba-8af5-4c72874bd298 limit=100 consulta=Muéstrame los 10 alumnos con mejor promedio en matemáticas del segundo trimestre
+2026-06-17 13:14:58 | INFO     | app.routers.consulta_natural | _generate_sql: calling OpenAI model=gpt-5.4-mini
+2026-06-17 13:15:00 | INFO     | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-17 13:15:00 | INFO     | app.routers.consulta_natural | _generate_sql: SQL generated (582 chars) full:
+SELECT e.id, e.codigo_estudiante, e.nombres, e.apellidos, AVG(ca.nota_obtenida) AS promedio
+FROM sia.calificacion_actividad ca
+JOIN sia.actividad_evaluativa ae ON ae.id = ca.id_actividad
+JOIN sia.estudiante e ON e.id = ca.id_estudiante
+JOIN sia.materia m ON m.id = ae.id_materia
+JOIN sia.periodo_evaluacion pe ON pe.id = ae.id_periodo_evaluacion
+WHERE ca.id_institucion = 'df679c57-39ec-44ba-8af5-4c72874bd298'::uuid
+  AND m.nombre ILIKE '%matemáticas%'
+  AND pe.numero_periodo = 2
+GROUP BY e.id, e.codigo_estudiante, e.nombres, e.apellidos
+ORDER BY promedio DESC
+LIMIT 10
+LIMIT 100
+2026-06-17 13:15:00 | INFO     | app.routers.consulta_natural | _execute_sql: executing query (582 chars)
+2026-06-17 13:15:02 | ERROR    | app.routers.consulta_natural | _execute_sql: PostgresError — syntax error at or near "LIMIT"
+2026-06-17 13:15:02 | WARNING  | app.routers.consulta_natural | consulta_natural: error (intento 1/3), corrigiendo — syntax error at or near "LIMIT"
+2026-06-17 13:15:02 | WARNING  | app.routers.consulta_natural | _correct_sql: error=syntax error at or near "LIMIT"
+bad_sql=
+SELECT e.id, e.codigo_estudiante, e.nombres, e.apellidos, AVG(ca.nota_obtenida) AS promedio
+FROM sia.calificacion_actividad ca
+JOIN sia.actividad_evaluativa ae ON ae.id = ca.id_actividad
+JOIN sia.estudiante e ON e.id = ca.id_estudiante
+JOIN sia.materia m ON m.id = ae.id_materia
+JOIN sia.periodo_evaluacion pe ON pe.id = ae.id_periodo_evaluacion
+WHERE ca.id_institucion = 'df679c57-39ec-44ba-8af5-4c72874bd298'::uuid
+  AND m.nombre ILIKE '%matemáticas%'
+  AND pe.numero_periodo = 2
+GROUP BY e.id, e.codigo_estudiante, e.nombres, e.apellidos
+ORDER BY promedio DESC
+LIMIT 10
+LIMIT 100
+2026-06-17 13:15:04 | INFO     | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-17 13:15:04 | INFO     | app.routers.consulta_natural | _correct_sql: corrected SQL (855 chars): SELECT e.id, e.codigo_estudiante, e.nombres, e.apellidos, AVG(ca.nota_obtenida) AS promedio
+FROM sia.calificacion_actividad ca
+JOIN sia.actividad_evaluativa ae ON ae.id = ca.id_actividad
+JOIN sia.estu
+2026-06-17 13:15:04 | INFO     | app.routers.consulta_natural | _execute_sql: executing query (855 chars)
+2026-06-17 13:15:05 | INFO     | app.access | POST /api/ia/reporte/consulta-natural 200 | 7877.9ms | ip=127.0.0.1
+2026-06-17 13:17:10 | INFO     | app.dependencies | verify_jwt: OK user_id=robertocervantes@gmail.com id_institucion=df679c57-39ec-44ba-8af5-4c72874bd298 roles=['ADMIN_INSTITUCION']
+2026-06-17 13:17:10 | INFO     | app.routers.consulta_natural | consulta_natural: id_institucion=df679c57-39ec-44ba-8af5-4c72874bd298 consulta=Muéstrame los 10 alumnos con mejor promedio en matemáticas del segundo trimestre limit=100
+2026-06-17 13:17:10 | INFO     | app.routers.consulta_natural | _generate_sql: id_institucion=df679c57-39ec-44ba-8af5-4c72874bd298 limit=100 consulta=Muéstrame los 10 alumnos con mejor promedio en matemáticas del segundo trimestre
+2026-06-17 13:17:11 | INFO     | app.routers.consulta_natural | _generate_sql: calling OpenAI model=gpt-5.4-mini
+2026-06-17 13:17:14 | INFO     | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-17 13:17:14 | INFO     | app.routers.consulta_natural | _generate_sql: SQL generated (879 chars) full:
+SELECT e.id, e.codigo_estudiante, e.nombres, e.apellidos, AVG(ca.nota_obtenida) AS promedio_matematicas
+FROM sia.calificacion_actividad ca
+JOIN sia.actividad_evaluativa ae ON ae.id = ca.id_actividad
+JOIN sia.estudiante e ON e.id = ca.id_estudiante
+JOIN sia.materia m ON m.id = ae.id_materia
+JOIN sia.periodo_evaluacion pe ON pe.id = ae.id_periodo_evaluacion
+WHERE ca.id_institucion = 'df679c57-39ec-44ba-8af5-4c72874bd298'::uuid
+  AND ae.id_institucion = 'df679c57-39ec-44ba-8af5-4c72874bd298'::uuid
+  AND e.id_institucion = 'df679c57-39ec-44ba-8af5-4c72874bd298'::uuid
+  AND m.id_institucion = 'df679c57-39ec-44ba-8af5-4c72874bd298'::uuid
+  AND pe.id_institucion = 'df679c57-39ec-44ba-8af5-4c72874bd298'::uuid
+  AND m.nombre ILIKE '%matemáticas%'
+  AND pe.numero_periodo = 2
+GROUP BY e.id, e.codigo_estudiante, e.nombres, e.apellidos
+ORDER BY promedio_matematicas DESC
+LIMIT 100
+2026-06-17 13:17:14 | INFO     | app.routers.consulta_natural | _execute_sql: executing query (879 chars)
+2026-06-17 13:17:16 | INFO     | app.access | POST /api/ia/reporte/consulta-natural 200 | 5352.7ms | ip=127.0.0.1
+2026-06-17 13:17:16 | INFO     | app.main | FastAPI shutting down
+2026-06-17 13:17:17 | INFO     | app.main | FastAPI started — environment=development port=8001 model=gpt-5.4-mini
+2026-06-17 13:17:17 | INFO     | app.main | FastAPI started — environment=development port=8001 model=gpt-5.4-mini
+2026-06-17 13:18:10 | INFO     | app.dependencies | verify_jwt: OK user_id=robertocervantes@gmail.com id_institucion=df679c57-39ec-44ba-8af5-4c72874bd298 roles=['ADMIN_INSTITUCION']
+2026-06-17 13:18:10 | INFO     | app.routers.consulta_natural | consulta_natural: id_institucion=df679c57-39ec-44ba-8af5-4c72874bd298 consulta=Muéstrame los 10 alumnos con mejor promedio en matemáticas del segundo trimestre limit=100
+2026-06-17 13:18:10 | INFO     | app.routers.consulta_natural | _generate_sql: id_institucion=df679c57-39ec-44ba-8af5-4c72874bd298 limit=100 consulta=Muéstrame los 10 alumnos con mejor promedio en matemáticas del segundo trimestre
+2026-06-17 13:18:11 | INFO     | app.routers.consulta_natural | _generate_sql: calling OpenAI model=gpt-5.4-mini
+2026-06-17 13:18:14 | INFO     | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-17 13:18:14 | INFO     | app.routers.consulta_natural | _generate_sql: SQL generated (739 chars) full:
+SELECT e.id, e.codigo_estudiante, e.nombres, e.apellidos, AVG(ca.nota_obtenida) AS promedio
+FROM sia.calificacion_actividad ca
+JOIN sia.actividad_evaluativa ae ON ae.id = ca.id_actividad AND ae.id_institucion = ca.id_institucion
+JOIN sia.materia m ON m.id = ae.id_materia AND m.id_institucion = ae.id_institucion
+JOIN sia.estudiante e ON e.id = ca.id_estudiante AND e.id_institucion = ca.id_institucion
+JOIN sia.periodo_evaluacion pe ON pe.id = ae.id_periodo_evaluacion AND pe.id_institucion = ae.id_institucion
+WHERE ca.id_institucion = 'df679c57-39ec-44ba-8af5-4c72874bd298'::uuid
+  AND m.nombre ILIKE '%matemáticas%'
+  AND pe.numero_periodo = 2
+GROUP BY e.id, e.codigo_estudiante, e.nombres, e.apellidos
+ORDER BY promedio DESC
+LIMIT 10;
+2026-06-17 13:18:14 | INFO     | app.routers.consulta_natural | _execute_sql: executing query (739 chars)
+2026-06-17 13:18:15 | INFO     | app.access | POST /api/ia/reporte/consulta-natural 200 | 5016.5ms | ip=127.0.0.1
+2026-06-17 13:20:55 | INFO     | app.dependencies | verify_jwt: OK user_id=robertocervantes@gmail.com id_institucion=df679c57-39ec-44ba-8af5-4c72874bd298 roles=['ADMIN_INSTITUCION']
+2026-06-17 13:20:55 | INFO     | app.routers.consulta_natural | consulta_natural: id_institucion=df679c57-39ec-44ba-8af5-4c72874bd298 consulta=Muéstrame los 10 alumnos con mejor promedio en matemáticas del segundo trimestre limit=100
+2026-06-17 13:20:55 | INFO     | app.routers.consulta_natural | _generate_sql: id_institucion=df679c57-39ec-44ba-8af5-4c72874bd298 limit=100 consulta=Muéstrame los 10 alumnos con mejor promedio en matemáticas del segundo trimestre
+2026-06-17 13:20:55 | INFO     | app.routers.consulta_natural | _generate_sql: calling OpenAI model=gpt-5.4-mini
+2026-06-17 13:20:58 | INFO     | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-17 13:20:58 | INFO     | app.routers.consulta_natural | _generate_sql: SQL generated (597 chars) full:
+SELECT e.id, e.codigo_estudiante, e.nombres, e.apellidos, AVG(ca.nota_obtenida) AS promedio_matematicas
+FROM sia.calificacion_actividad ca
+JOIN sia.actividad_evaluativa ae ON ae.id = ca.id_actividad
+JOIN sia.materia m ON m.id = ae.id_materia
+JOIN sia.estudiante e ON e.id = ca.id_estudiante
+JOIN sia.periodo_evaluacion pe ON pe.id = ae.id_periodo_evaluacion
+WHERE ca.id_institucion = 'df679c57-39ec-44ba-8af5-4c72874bd298'::uuid
+  AND m.nombre ILIKE '%matemáticas%'
+  AND pe.numero_periodo = 2
+GROUP BY e.id, e.codigo_estudiante, e.nombres, e.apellidos
+ORDER BY promedio_matematicas DESC
+LIMIT 10;
+2026-06-17 13:20:58 | INFO     | app.routers.consulta_natural | _execute_sql: executing query (597 chars)
+2026-06-17 13:20:59 | INFO     | app.access | POST /api/ia/reporte/consulta-natural 200 | 4554.0ms | ip=127.0.0.1
+2026-06-17 13:20:59 | INFO     | app.main | FastAPI shutting down
+2026-06-17 13:21:00 | INFO     | app.main | FastAPI started — environment=development port=8001 model=gpt-5.4-mini
+2026-06-17 13:21:08 | INFO     | app.dependencies | verify_jwt: OK user_id=robertocervantes@gmail.com id_institucion=df679c57-39ec-44ba-8af5-4c72874bd298 roles=['ADMIN_INSTITUCION']
+2026-06-17 13:21:08 | INFO     | app.routers.consulta_natural | consulta_natural: id_institucion=df679c57-39ec-44ba-8af5-4c72874bd298 consulta=Muéstrame los 10 alumnos con mejor promedio en matemáticas del segundo trimestre limit=100
+2026-06-17 13:21:08 | INFO     | app.routers.consulta_natural | _generate_sql: id_institucion=df679c57-39ec-44ba-8af5-4c72874bd298 limit=100 consulta=Muéstrame los 10 alumnos con mejor promedio en matemáticas del segundo trimestre
+2026-06-17 13:21:09 | INFO     | app.routers.consulta_natural | _generate_sql: calling OpenAI model=gpt-5.4-mini
+2026-06-17 13:21:12 | INFO     | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-17 13:21:12 | INFO     | app.routers.consulta_natural | _generate_sql: SQL generated (853 chars) full:
+SELECT e.id, e.codigo_estudiante, e.nombres, e.apellidos, AVG(ca.nota_obtenida) AS promedio
+FROM sia.calificacion_actividad ca
+JOIN sia.actividad_evaluativa ae ON ae.id = ca.id_actividad
+JOIN sia.materia m ON m.id = ae.id_materia
+JOIN sia.estudiante e ON e.id = ca.id_estudiante
+JOIN sia.periodo_evaluacion pe ON pe.id = ae.id_periodo_evaluacion
+WHERE ca.id_institucion = 'df679c57-39ec-44ba-8af5-4c72874bd298'::uuid
+  AND ae.id_institucion = 'df679c57-39ec-44ba-8af5-4c72874bd298'::uuid
+  AND m.id_institucion = 'df679c57-39ec-44ba-8af5-4c72874bd298'::uuid
+  AND e.id_institucion = 'df679c57-39ec-44ba-8af5-4c72874bd298'::uuid
+  AND pe.id_institucion = 'df679c57-39ec-44ba-8af5-4c72874bd298'::uuid
+  AND m.nombre ILIKE '%matematica%'
+  AND pe.numero_periodo = 2
+GROUP BY e.id, e.codigo_estudiante, e.nombres, e.apellidos
+ORDER BY promedio DESC
+LIMIT 10
+2026-06-17 13:21:12 | INFO     | app.routers.consulta_natural | _execute_sql: executing query (853 chars)
+2026-06-17 13:21:13 | INFO     | app.routers.consulta_natural | _execute_sql: 10 rows returned
+2026-06-17 13:21:13 | INFO     | app.access | POST /api/ia/reporte/consulta-natural 200 | 5664.1ms | ip=127.0.0.1
+2026-06-17 15:05:19 | INFO     | app.main | FastAPI shutting down
+2026-06-17 15:05:20 | INFO     | app.main | FastAPI started — environment=development port=8001 model=gpt-5.4-mini
+2026-06-17 15:05:21 | INFO     | app.main | FastAPI started — environment=development port=8001 model=gpt-5.4-mini
+2026-06-17 15:05:52 | INFO     | app.dependencies | verify_jwt: OK user_id=robertocervantes@gmail.com id_institucion=df679c57-39ec-44ba-8af5-4c72874bd298 roles=['ADMIN_INSTITUCION']
+2026-06-17 15:05:52 | INFO     | app.routers.consulta_natural | consulta_natural: id_institucion=df679c57-39ec-44ba-8af5-4c72874bd298 consulta=cuantos alumnos tiene el colegio? limit=100
+2026-06-17 15:05:52 | INFO     | app.routers.consulta_natural | _generate_sql: id_institucion=df679c57-39ec-44ba-8af5-4c72874bd298 limit=100 consulta=cuantos alumnos tiene el colegio?
+2026-06-17 15:05:54 | INFO     | app.routers.consulta_natural | _generate_sql: calling OpenAI model=gpt-5.4-mini
+2026-06-17 15:06:01 | INFO     | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-17 15:06:01 | INFO     | app.routers.consulta_natural | _generate_sql: SQL generated (135 chars) full:
+SELECT COUNT(*) AS total_alumnos
+FROM sia.estudiante e
+WHERE e.id_institucion = 'df679c57-39ec-44ba-8af5-4c72874bd298'::uuid
+LIMIT 100;
+2026-06-17 15:06:01 | INFO     | app.routers.consulta_natural | _execute_sql: executing query (135 chars)
+2026-06-17 15:06:02 | INFO     | app.routers.consulta_natural | _execute_sql: 1 rows returned
+2026-06-17 15:06:05 | INFO     | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-17 15:06:05 | INFO     | app.access | POST /api/ia/reporte/consulta-natural 200 | 12860.1ms | ip=127.0.0.1
+2026-06-17 15:06:30 | INFO     | app.dependencies | verify_jwt: OK user_id=robertocervantes@gmail.com id_institucion=df679c57-39ec-44ba-8af5-4c72874bd298 roles=['ADMIN_INSTITUCION']
+2026-06-17 15:06:30 | INFO     | app.routers.consulta_natural | consulta_natural: id_institucion=df679c57-39ec-44ba-8af5-4c72874bd298 consulta=cuantos alumnos tiene el colegio? limit=100
+2026-06-17 15:06:30 | INFO     | app.routers.consulta_natural | _generate_sql: id_institucion=df679c57-39ec-44ba-8af5-4c72874bd298 limit=100 consulta=cuantos alumnos tiene el colegio?
+2026-06-17 15:06:30 | INFO     | app.routers.consulta_natural | _generate_sql: calling OpenAI model=gpt-5.4-mini
+2026-06-17 15:06:32 | INFO     | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-17 15:06:32 | INFO     | app.routers.consulta_natural | _generate_sql: SQL generated (134 chars) full:
+SELECT COUNT(*) AS total_alumnos
+FROM sia.estudiante e
+WHERE e.id_institucion = 'df679c57-39ec-44ba-8af5-4c72874bd298'::uuid
+LIMIT 100
+2026-06-17 15:06:32 | INFO     | app.routers.consulta_natural | _execute_sql: executing query (134 chars)
+2026-06-17 15:06:36 | INFO     | app.routers.consulta_natural | _execute_sql: 1 rows returned
+2026-06-17 15:06:42 | INFO     | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-17 15:06:42 | INFO     | app.access | POST /api/ia/reporte/consulta-natural 200 | 11648.9ms | ip=127.0.0.1
+2026-06-17 15:08:36 | INFO     | app.dependencies | verify_jwt: OK user_id=robertocervantes@gmail.com id_institucion=df679c57-39ec-44ba-8af5-4c72874bd298 roles=['ADMIN_INSTITUCION']
+2026-06-17 15:08:36 | INFO     | app.routers.consulta_natural | consulta_natural: id_institucion=df679c57-39ec-44ba-8af5-4c72874bd298 consulta=cual es mi plan actual? limit=100
+2026-06-17 15:08:36 | INFO     | app.routers.consulta_natural | _generate_sql: id_institucion=df679c57-39ec-44ba-8af5-4c72874bd298 limit=100 consulta=cual es mi plan actual?
+2026-06-17 15:08:36 | INFO     | app.routers.consulta_natural | _generate_sql: calling OpenAI model=gpt-5.4-mini
+2026-06-17 15:08:38 | INFO     | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-17 15:08:38 | INFO     | app.routers.consulta_natural | _generate_sql: SQL generated (156 chars) full:
+SELECT ce.*
+FROM sia.cuota_estudiante ce
+WHERE ce.id_institucion = 'df679c57-39ec-44ba-8af5-4c72874bd298'::uuid
+ORDER BY ce.fecha_vencimiento DESC
+LIMIT 100
+2026-06-17 15:08:38 | INFO     | app.routers.consulta_natural | _execute_sql: executing query (156 chars)
+2026-06-17 15:08:39 | INFO     | app.routers.consulta_natural | _execute_sql: 100 rows returned
+2026-06-17 15:08:43 | INFO     | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-17 15:08:43 | INFO     | app.access | POST /api/ia/reporte/consulta-natural 200 | 7159.0ms | ip=127.0.0.1
+2026-06-17 17:44:42 | INFO     | app.dependencies | verify_jwt: OK user_id=robertocervantes@gmail.com id_institucion=df679c57-39ec-44ba-8af5-4c72874bd298 roles=['ADMIN_INSTITUCION']
+2026-06-17 17:44:42 | INFO     | app.routers.consulta_natural | consulta_natural: id_institucion=df679c57-39ec-44ba-8af5-4c72874bd298 consulta=quienes son los mejores alumnos? limit=100
+2026-06-17 17:44:42 | INFO     | app.routers.consulta_natural | _generate_sql: id_institucion=df679c57-39ec-44ba-8af5-4c72874bd298 limit=100 consulta=quienes son los mejores alumnos?
+2026-06-17 17:44:43 | INFO     | app.routers.consulta_natural | _generate_sql: calling OpenAI model=gpt-5.4-mini
+2026-06-17 17:44:47 | INFO     | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-17 17:44:47 | INFO     | app.routers.consulta_natural | _generate_sql: SQL generated (349 chars) full:
+SELECT e.id, e.codigo_estudiante, e.nombres, e.apellidos, AVG(ca.nota_obtenida) AS promedio_nota
+FROM sia.calificacion_actividad ca
+JOIN sia.estudiante e ON e.id = ca.id_estudiante
+WHERE ca.id_institucion = 'df679c57-39ec-44ba-8af5-4c72874bd298'::uuid
+GROUP BY e.id, e.codigo_estudiante, e.nombres, e.apellidos
+ORDER BY promedio_nota DESC
+LIMIT 100;
+2026-06-17 17:44:47 | INFO     | app.routers.consulta_natural | _execute_sql: executing query (349 chars)
+2026-06-17 17:44:48 | INFO     | app.routers.consulta_natural | _execute_sql: 100 rows returned
+2026-06-17 17:44:51 | INFO     | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-17 17:44:51 | INFO     | app.access | POST /api/ia/reporte/consulta-natural 200 | 8844.1ms | ip=127.0.0.1
+2026-06-17 17:48:25 | INFO     | app.dependencies | verify_jwt: OK user_id=robertocervantes@gmail.com id_institucion=df679c57-39ec-44ba-8af5-4c72874bd298 roles=['ADMIN_INSTITUCION']
+2026-06-17 17:48:25 | INFO     | app.routers.consulta_natural | consulta_natural: id_institucion=df679c57-39ec-44ba-8af5-4c72874bd298 consulta=quienes son los mejores alumnos? limit=100
+2026-06-17 17:48:25 | INFO     | app.routers.consulta_natural | _generate_sql: id_institucion=df679c57-39ec-44ba-8af5-4c72874bd298 limit=100 consulta=quienes son los mejores alumnos?
+2026-06-17 17:48:26 | INFO     | app.routers.consulta_natural | _generate_sql: calling OpenAI model=gpt-5.4-mini
+2026-06-17 17:48:29 | INFO     | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-17 17:48:29 | INFO     | app.routers.consulta_natural | _generate_sql: SQL generated (419 chars) full:
+SELECT e.id, e.codigo_estudiante, e.nombres, e.apellidos, AVG(ca.nota_obtenida) AS promedio_nota
+FROM sia.calificacion_actividad ca
+JOIN sia.estudiante e ON e.id = ca.id_estudiante
+WHERE ca.id_institucion = 'df679c57-39ec-44ba-8af5-4c72874bd298'::uuid
+  AND e.id_institucion = 'df679c57-39ec-44ba-8af5-4c72874bd298'::uuid
+GROUP BY e.id, e.codigo_estudiante, e.nombres, e.apellidos
+ORDER BY promedio_nota DESC
+LIMIT 100;
+2026-06-17 17:48:29 | INFO     | app.routers.consulta_natural | _execute_sql: executing query (419 chars)
+2026-06-17 17:48:30 | INFO     | app.routers.consulta_natural | _execute_sql: 100 rows returned
+2026-06-17 17:48:33 | INFO     | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-17 17:48:33 | INFO     | app.access | POST /api/ia/reporte/consulta-natural 200 | 7788.3ms | ip=127.0.0.1
+2026-06-17 17:48:33 | INFO     | app.main | FastAPI shutting down
+2026-06-17 17:48:34 | INFO     | app.main | FastAPI started — environment=development port=8001 model=gpt-5.4-mini
+2026-06-17 17:48:42 | INFO     | app.dependencies | verify_jwt: OK user_id=robertocervantes@gmail.com id_institucion=df679c57-39ec-44ba-8af5-4c72874bd298 roles=['ADMIN_INSTITUCION']
+2026-06-17 17:48:42 | INFO     | app.routers.consulta_natural | consulta_natural: id_institucion=df679c57-39ec-44ba-8af5-4c72874bd298 consulta=quienes son los mejores alumnos? limit=100
+2026-06-17 17:48:42 | INFO     | app.routers.consulta_natural | _generate_sql: id_institucion=df679c57-39ec-44ba-8af5-4c72874bd298 limit=100 consulta=quienes son los mejores alumnos?
+2026-06-17 17:48:43 | INFO     | app.routers.consulta_natural | _generate_sql: calling OpenAI model=gpt-5.4-mini
+2026-06-17 17:48:46 | INFO     | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-17 17:48:46 | INFO     | app.routers.consulta_natural | _generate_sql: SQL generated (528 chars) full:
+SELECT e.id, e.codigo_estudiante, e.nombres, e.apellidos, AVG(ca.nota_obtenida) AS promedio
+FROM sia.estudiante e
+JOIN sia.inscripcion i ON i.id_estudiante = e.id
+JOIN sia.calificacion_actividad ca ON ca.id_estudiante = e.id
+WHERE e.id_institucion = 'df679c57-39ec-44ba-8af5-4c72874bd298'::uuid
+  AND i.id_institucion = 'df679c57-39ec-44ba-8af5-4c72874bd298'::uuid
+  AND ca.id_institucion = 'df679c57-39ec-44ba-8af5-4c72874bd298'::uuid
+GROUP BY e.id, e.codigo_estudiante, e.nombres, e.apellidos
+ORDER BY promedio DESC
+LIMIT 100;
+2026-06-17 17:48:46 | INFO     | app.routers.consulta_natural | _execute_sql: executing query (528 chars)
+2026-06-17 17:48:47 | INFO     | app.routers.consulta_natural | _execute_sql: 100 rows returned
+2026-06-17 17:48:50 | INFO     | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-17 17:48:50 | INFO     | app.routers.consulta_natural | _interpretar_resultado: OK — 902 chars, 100 filas
+2026-06-17 17:48:50 | INFO     | app.access | POST /api/ia/reporte/consulta-natural 200 | 8202.2ms | ip=127.0.0.1
