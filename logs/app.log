@@ -629,3 +629,21 @@ LIMIT 100;
 2026-06-17 17:48:50 | INFO     | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
 2026-06-17 17:48:50 | INFO     | app.routers.consulta_natural | _interpretar_resultado: OK — 902 chars, 100 filas
 2026-06-17 17:48:50 | INFO     | app.access | POST /api/ia/reporte/consulta-natural 200 | 8202.2ms | ip=127.0.0.1
+2026-06-18 13:07:36 | INFO     | app.dependencies | verify_jwt: OK user_id=robertocervantes@gmail.com id_institucion=df679c57-39ec-44ba-8af5-4c72874bd298 roles=['ADMIN_INSTITUCION']
+2026-06-18 13:07:36 | INFO     | app.routers.consulta_natural | consulta_natural: id_institucion=df679c57-39ec-44ba-8af5-4c72874bd298 consulta=quienes son los mejores alumnos? limit=100
+2026-06-18 13:07:36 | INFO     | app.routers.consulta_natural | _generate_sql: id_institucion=df679c57-39ec-44ba-8af5-4c72874bd298 limit=100 consulta=quienes son los mejores alumnos?
+2026-06-18 13:07:37 | INFO     | app.routers.consulta_natural | _generate_sql: calling OpenAI model=gpt-5.4-mini
+2026-06-18 13:07:40 | INFO     | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-18 13:07:40 | INFO     | app.routers.consulta_natural | _generate_sql: SQL generated (348 chars) full:
+SELECT e.id, e.codigo_estudiante, e.nombres, e.apellidos, AVG(ca.nota_obtenida) AS promedio_nota
+FROM sia.calificacion_actividad ca
+JOIN sia.estudiante e ON e.id = ca.id_estudiante
+WHERE ca.id_institucion = 'df679c57-39ec-44ba-8af5-4c72874bd298'::uuid
+GROUP BY e.id, e.codigo_estudiante, e.nombres, e.apellidos
+ORDER BY promedio_nota DESC
+LIMIT 100
+2026-06-18 13:07:40 | INFO     | app.routers.consulta_natural | _execute_sql: executing query (348 chars)
+2026-06-18 13:07:42 | INFO     | app.routers.consulta_natural | _execute_sql: 100 rows returned
+2026-06-18 13:07:45 | INFO     | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-18 13:07:45 | INFO     | app.routers.consulta_natural | _interpretar_resultado: OK — 719 chars, 100 filas
+2026-06-18 13:07:45 | INFO     | app.access | POST /api/ia/reporte/consulta-natural 200 | 8753.7ms | ip=127.0.0.1
