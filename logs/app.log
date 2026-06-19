@@ -647,3 +647,4 @@ LIMIT 100
 2026-06-18 13:07:45 | INFO     | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
 2026-06-18 13:07:45 | INFO     | app.routers.consulta_natural | _interpretar_resultado: OK — 719 chars, 100 filas
 2026-06-18 13:07:45 | INFO     | app.access | POST /api/ia/reporte/consulta-natural 200 | 8753.7ms | ip=127.0.0.1
+2026-06-19 15:47:38 | INFO     | app.main | FastAPI shutting down
